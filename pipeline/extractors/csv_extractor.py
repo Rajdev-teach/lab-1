@@ -1,0 +1,30 @@
+import logging
+from pathlib import Path
+
+import pandas as pd
+
+logger = logging.getLogger(__name__)
+
+
+def extract_csv(file_path: str, **kwargs) -> pd.DataFrame:
+    path = Path(file_path)
+
+    if not path.exists():
+        logger.error(f"File not found: {path.absolute()}")
+        raise FileNotFoundError(f"Missing file: {path}")
+
+    try:
+        encoding = kwargs.pop("encoding", "utf-8")
+
+        df = pd.read_csv(path, encoding=encoding, **kwargs)
+
+        logger.info(
+            f"Extracted {df.shape[0]} rows and "
+            f"{df.shape[1]} columns from {path}"
+        )
+
+        return df
+
+    except Exception as e:
+        logger.error(f"Failed to parse CSV {path}: {e}")
+        raise
