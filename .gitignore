@@ -4,3 +4,25 @@ logs/
 .env
 .venv/
 logs/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+.venv/
+
+# Environment secrets
+.env
+
+# Logs
+logs/
+*.log
+
+# Airflow runtime files
+airflow/airflow-webserver.pid
+airflow/logs/
+airflow/*.db
+
+# PostgreSQL/runtime
+pgdata/
