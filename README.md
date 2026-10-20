@@ -84,10 +84,24 @@ The pipeline was executed multiple times and the row counts remained unchanged, 
 
 ## Running the Pipeline
 
+Use Python 3.10 or newer and an existing PostgreSQL database. From the repository root:
+
 ```bash
+python -m venv .venv
 source .venv/bin/activate
+python -m pip install -r requirements.txt
+cp .env.example .env
+```
+
+On Windows PowerShell, activate with `.\.venv\Scripts\Activate.ps1` and copy the configuration with `Copy-Item .env.example .env`.
+
+Edit `.env` to set `DATABASE_URL` for your PostgreSQL database and user. The `API_URL` example reads synthetic orders from JSONPlaceholder. The pipeline creates its tables; the database must already exist. Keep the real `.env` file out of version control.
+
+```bash
 python main.py
 ```
+
+The requirements above cover the standalone ETL pipeline. Install Apache Airflow separately, with its matching Python constraints, only when running the DAGs in `dags/`.
 
 ## Author
 
